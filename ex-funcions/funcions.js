@@ -45,7 +45,6 @@ La funció ha de retornar una cadena que contingui el valor numèric de la nota 
     Si la nota final és major o igual que 8 i menor que 10 tindrà una A.
     > I si la nota final és un 10 tindrà una H. 
 Important: Totes tres notes seran valors numèrics, i podem suposar que sempre tindrem els tres valors i seran més grans o iguals que 0. */
-
 function notaFinal(NOTA_AC, NOTA_PRACT, NOTA_EXAMEN) {
     let NOTA_FINAL = 0; // 0 perque és un nombre
         NOTA_FINALLETRA = "" // vuit perque és una lletra
@@ -69,7 +68,6 @@ function notaFinal(NOTA_AC, NOTA_PRACT, NOTA_EXAMEN) {
     return NOTA_FINALLETRA;
 }
 
-
 /* 5 Hem organitzat un concurs a Twitter que consisteix en fer relats curs (màxim 280 caràcters) amb el màxim número de paraules de 5 caràcters. Per poder donar el premi, el que volem fer és classificar tots  els tuits segons el nombre de paraules de 5 caràcters que tenen i, per tant, necessitem una funció que, donada una frase, ens retorni el número de paraules de 5 caràcters que té.
 Per fer aquesta funció haurem de tenir en compte que: 
     Totes les frases acaben en un punt (.) y totes comencen sempre per una paraula. 
@@ -77,7 +75,6 @@ Per fer aquesta funció haurem de tenir en compte que:
     Les frases només poden tenir lletres, comes, espais en blanc y el punt final. No tindrem en compte que pugui aparèixer cap altre caràcter. 
     Per conèixer la llargària de la frase (quants caràcters té) podem fer servir la propietat length del Strings de JavaScript (consulteu https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Str ing/length per saber com fer-la servir) 
     */
-
 function contador(relat) {
     let paraulesDe5Lletres = 0; //inicialitzem el contador de paraules
     let lletres = 0; //inicialitzem el contador de lletres
@@ -101,6 +98,101 @@ function contador(relat) {
 }  
 
 //6 A partir de l’experiència del concurs anterior hem decidir fer un concurs semblant cada setmana. Però cada setmana volem comptar paraules amb diferents números de lletres. Així aquesta setmana seran paraules de 7 lletres, la setmana vinent de 4 i l’altre de 3. Què cal modificar a la funció per a que puguem fer servir la mateixa funció totes les setmanes? 
-
+    // Només cal afegir el paràmetre del número de lletres nou per setmanes
+function contador(relat,nLletres) {
+    let paraulesDe5Lletres = 0;
+    let lletres = 0; // número de lletres de la paraula actual
+    let i = 0; // posició en la cadena de caràcters
+    // Per saber quan he d'acabar, tinc en compte que la cadena acaba en punt.
+    while (relat[i] !== ".") {
+      if (relat[i] === " ") {
+        // si trobem un espai, estem canviant de paraula
+        if (lletres === nLletres) { // si les llestres de la paruala són iguals a les lletres triades sent el paràmetre nou, doncs ...
+          paraulesDe5Lletres++;
+        }
+        lletres = 0; // Com que estem canviant de paraula, tornem el comptador de lletres a 0
+      } else if (relat[i] !== ",") { // si no és un espai, ni una coma, comptem com una lletra més
+        lletres++;
+      }
+      i++;
+    }
+    if (lletres === nLletres) { // per comptabilitzar també la paraula final acabada en .
+      paraulesDe5Lletres++;
+    }
+    return paraulesDe5Lletres;
+  }
+  
 //7 Un conegut que ha vist els nostres concursos ens ha preguntat com ho fem per comptar les paraules d’un determinat número de lletres. Un cop l’hem explicat ens ha demanat si li podíem fer una funció que, donada una frase, ens retorni a una taula quantes paraules hi ha amb 1, 2, 3, 4, 5, 6 o 7 lletres.
+function comptarParaulesPerLongitud(frase) {
+    let comptadors = [0, 0, 0, 0, 0, 0, 0]; // Taula per comptar paraules de longituds 1 a 7
+    let paraulaActual = ""; // Variable temporal per construir cada paraula
+  
+    // Recorrem tota la frase
+    for (let i = 0; i < frase.length; i++) {
+        const car = frase[i]; // Agafem el caràcter actual
+  
+        if (car === " " || car === "," || car === ".") {
+            // Si trobem un separador (espai, coma, punt)
+            if (paraulaActual.length >= 1 && paraulaActual.length <= 7) {
+                // Si la paraula està dins del rang 1-7, incrementem el comptador corresponent
+                comptadors[paraulaActual.length - 1]++;
+            }
+            paraulaActual = ""; // Reiniciem la paraula actual
+        } else {
+            // Si no és un separador, afegim el caràcter a la paraula actual
+            paraulaActual += car;
+        }
+    }
+  
+    return comptadors; // Retornem la taula de comptadors
+  }
+//--------------------------------------------------------------------------------------------------------------- --------------------------------------------------------------------------------------------------------------- --------------------------------------------------------------------------------------------------------------- --------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------
 
+// 19.1 Crea una funció que rebi un nombre i retorni aquest nombre elevat al quadrat.
+function quadrat (numerito) {
+    let resultato = 0;
+    resultato = numerito * numerito;
+
+    return resultato;
+}
+
+// 19.2.- Crea una funció que rebi un nombre i retorni aquest nombre elevat al cub.
+function cub (numerete) {
+    let resultatum = 0;
+    resultatum = numerete * numerete * numerete;
+    return resultatum;
+/* alternativa: 
+    function cub (numerete) {
+        return Math.pow (valor, 3);
+} 
+// 19.3.- Crea una funció que rebi dos nombres i retorni el primer nombre elevat al segon.
+// 19.4.- Crea una funció que donat un valor en milles retorni la seva equivalència en metros. 1 milla = 1852 metros.
+// 19.5.- Crea una funció que, donat un nombre del 0 al 10 retorni una cadena de caràcters amb el nom del nombre donat.
+// 19.6.- Crea una funció que, rebut un nombre de segons retorni una cadena de caràcters on es digui quantes hores minuts i segons són.
+// 19.7.- Crea una funció que, donades les hores treballades en una setmana i el salari brut per hora, calculi el seu salari. Si les hores treballades són més de 40, aquestes hores sobreres, es pagaran un 50% més cares que una hora normal.
+/*19.8.- Fer una funció que, donat un any, retorni si és de traspàs o no. Un any és de traspàs si és divisible per 4 i no per 100, però sí si és divisible per 400. El valor retornat per la funció haurà de ser un valor booleà.
+Anys de traspàs: 
+1904, 1908, 1912, 1916, 1920, 1924, 1928, 1932, 1936, 1940, 1944, 1948, 1952, 1956,
+1960, 1964, 1968, 1972, 1976, 1980, 1984, 1988, 1992, 1996, 2000
+1900 
+no és de traspàs perquè és divisible per 100 però no per 400.*/
+
+// 19.9.- La funció Math.random() de JavaScript retorna un valor dins del rang [0,1) (0 inclòs, 1 no inclòs). La funció Math.floor(valor) ens retorna valor eliminant els decimals. Fent servir aquestes funcions, crear una funció que donats dos valors min i max ens calculi un nombre aleatori entre min i max, ambdòs inclosos.
+/* 19.10.- Crea una funció en la que donat un text, indiqui si és o no un palíndrom.
+Exemples de palíndroms:
+- "amad a la dama"
+- "anna"
+- "azuza"
+- "3003"
+- "1001001"
+*/
+
+/* 19.11.- Crea una funció que rebi una cadena de caràcters i retorni aquesta cadena codificada segons les següents regles:
+    - Es posaran les paraules en l’ordre invers
+    - Els caràcters que conformen les paraules també s’han d’invertir.
+    - Les vocals que apareguin s’han de canviar pel seu número equivalent (a=1, e=2, i=3, o=4 i u=5)
+Per exemple, donada la frase “The cat is in the roof.” Es retornarà això:
+    .f44r 2ht n3 s3 t1c 2hT
+    */
+
+    // 19.12.- Crea una funció que rep els tres paràmetres següents: 2 nombres i un dels següents valors "+", "-", "*", "/", "%", "pot" i retorni el resultat de l'operació realitzada. Fes servir la instrucció switch.
