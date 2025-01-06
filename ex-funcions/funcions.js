@@ -194,5 +194,3 @@ Exemples de palíndroms:
 Per exemple, donada la frase “The cat is in the roof.” Es retornarà això:
     .f44r 2ht n3 s3 t1c 2hT
     */
-
-    // 19.12.- Crea una funció que rep els tres paràmetres següents: 2 nombres i un dels següents valors "+", "-", "*", "/", "%", "pot" i retorni el resultat de l'operació realitzada. Fes servir la instrucció switch.
