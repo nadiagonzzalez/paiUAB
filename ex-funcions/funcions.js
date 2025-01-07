@@ -161,36 +161,44 @@ function cub (numerete) {
     let resultatum = 0;
     resultatum = numerete * numerete * numerete;
     return resultatum;
+}
 /* alternativa: 
     function cub (numerete) {
-        return Math.pow (valor, 3);
-} 
+        return Math.pow (numerete, 3); //la funció predefinidia de "Math.pow" elevat x a Y
+} */
+
 // 19.3.- Crea una funció que rebi dos nombres i retorni el primer nombre elevat al segon.
-// 19.4.- Crea una funció que donat un valor en milles retorni la seva equivalència en metros. 1 milla = 1852 metros.
+function elevacioDeRetorn(num1, num2) {
+    return Math.pow (num1, num2); //la funció predefinidia de "Math.pow" elevat el segon al primer
+    
+}
+
+// 19.4.- Crea una funció que donat un valor en milles retorni la seva equivalència en metroes. 1 milla = 1852 metros.
+function deMillesAMetres (valor) {
+    return valor*1852;
+}
+/* alternativa:
+function deMillesAMetres (valor) {
+    const MillesPerMetres = 1852;
+    return valor * MillesPerMetres;
+} */
+
 // 19.5.- Crea una funció que, donat un nombre del 0 al 10 retorni una cadena de caràcters amb el nom del nombre donat.
+function deNombreAText (nombre) {
+    const noms = ["zero", "un", "dos", "tres", "quatre", "cinc", "sis", "set", "vuit", "nou", "deu"];
+    //creació de llista amb totes les possibles respostes a donar pel programa
+    if (nombre >= 0 && nombre <= 10) { //valoració per veure si el nombre donat per l'usuari es troba entre 0 i 10
+        return noms[nombre]; // si és el cas, que torni la posició de la llista a la corresponent al número (per això és important que hagi de començar per 0)
+    }else {
+        return "El nombre no està entre 0 i 10";
+    }
+}
+
 // 19.6.- Crea una funció que, rebut un nombre de segons retorni una cadena de caràcters on es digui quantes hores minuts i segons són.
-// 19.7.- Crea una funció que, donades les hores treballades en una setmana i el salari brut per hora, calculi el seu salari. Si les hores treballades són més de 40, aquestes hores sobreres, es pagaran un 50% més cares que una hora normal.
-/*19.8.- Fer una funció que, donat un any, retorni si és de traspàs o no. Un any és de traspàs si és divisible per 4 i no per 100, però sí si és divisible per 400. El valor retornat per la funció haurà de ser un valor booleà.
-Anys de traspàs: 
-1904, 1908, 1912, 1916, 1920, 1924, 1928, 1932, 1936, 1940, 1944, 1948, 1952, 1956,
-1960, 1964, 1968, 1972, 1976, 1980, 1984, 1988, 1992, 1996, 2000
-1900 
-no és de traspàs perquè és divisible per 100 però no per 400.*/
+function conversioHores(valor) {
+    let hores = Math.floor (segons/3600); 
+    let minuts = Math.floor ((segons % 3600)/60);
+    let segons = Math.floor (segons % 60);
 
-// 19.9.- La funció Math.random() de JavaScript retorna un valor dins del rang [0,1) (0 inclòs, 1 no inclòs). La funció Math.floor(valor) ens retorna valor eliminant els decimals. Fent servir aquestes funcions, crear una funció que donats dos valors min i max ens calculi un nombre aleatori entre min i max, ambdòs inclosos.
-/* 19.10.- Crea una funció en la que donat un text, indiqui si és o no un palíndrom.
-Exemples de palíndroms:
-- "amad a la dama"
-- "anna"
-- "azuza"
-- "3003"
-- "1001001"
-*/
-
-/* 19.11.- Crea una funció que rebi una cadena de caràcters i retorni aquesta cadena codificada segons les següents regles:
-    - Es posaran les paraules en l’ordre invers
-    - Els caràcters que conformen les paraules també s’han d’invertir.
-    - Les vocals que apareguin s’han de canviar pel seu número equivalent (a=1, e=2, i=3, o=4 i u=5)
-Per exemple, donada la frase “The cat is in the roof.” Es retornarà això:
-    .f44r 2ht n3 s3 t1c 2hT
-    */
+    return `${hores} hores, ${minuts} minuts, ${segons} segons.`;
+}
